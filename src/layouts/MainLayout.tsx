@@ -10,7 +10,7 @@ export default function MainLayout(props: Props) {
   const { children } = props;
 
   return (
-    <div className="flex h-screen bg-white" style={{ color: "#232426" }}>
+    <div className="flex h-screen bg-white text-[#232426]">
       <Sidebar />
 
       <div className="flex flex-1 flex-col">
