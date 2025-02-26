@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import Sidebar from "../components/Sidebar";
+import Header from "../components/Header";
 
 interface Props {
   children: ReactNode;
@@ -12,7 +13,11 @@ export default function MainLayout(props: Props) {
     <div className="flex h-screen">
       <Sidebar />
 
-      <main className="flex-1">{children}</main>
+      <div className="flex flex-1 flex-col">
+        <Header />
+
+        <main className="flex-1">{children}</main>
+      </div>
     </div>
   );
 }
