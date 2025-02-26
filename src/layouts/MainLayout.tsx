@@ -16,7 +16,7 @@ export default function MainLayout(props: Props) {
       <div className="flex flex-1 flex-col">
         <Header />
 
-        <main className="flex-1">{children}</main>
+        <main className="flex-1 p-2">{children}</main>
       </div>
     </div>
   );
