@@ -1,4 +1,4 @@
-import SidebarFoldersSection from "./SidebarFoldersSection";
+import SidebarFoldersSection from "@app/components/Sidebar/SidebarFoldersSection";
 
 export default function Sidebar() {
   return (

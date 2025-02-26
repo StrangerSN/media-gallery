@@ -1,4 +1,4 @@
-import { Folder } from "../../contracts/folderContract";
+import { Folder } from "@app/contracts/folderContract";
 
 interface Props {
   folder: Folder;

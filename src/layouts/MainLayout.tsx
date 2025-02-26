@@ -1,6 +1,6 @@
+import Header from "@app/components/Header";
+import Sidebar from "@app/components/Sidebar/Sidebar";
 import { ReactNode } from "react";
-import Sidebar from "../components/Sidebar/Sidebar";
-import Header from "../components/Header";
 
 interface Props {
   children: ReactNode;

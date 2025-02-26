@@ -1,6 +1,5 @@
-import { Folder } from "../../contracts/folderContract";
-
-import SidebarFolder from "./SidebarFolder";
+import SidebarFolder from "@app/components/Sidebar/SidebarFolder";
+import { Folder } from "@app/contracts/folderContract";
 
 export default function SidebarFoldersSection() {
   const folders: Folder[] = [
