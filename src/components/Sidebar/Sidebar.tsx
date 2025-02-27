@@ -1,3 +1,4 @@
+import SidebarFiltersSection from "@app/components/Sidebar/SidebarFiltersSection";
 import SidebarFoldersSection from "@app/components/Sidebar/SidebarFoldersSection";
 import { NavLink } from "react-router";
 
@@ -11,6 +12,8 @@ export default function Sidebar() {
       </NavLink>
 
       <SidebarFoldersSection />
+
+      <SidebarFiltersSection />
     </nav>
   );
 }

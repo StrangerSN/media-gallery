@@ -7,7 +7,7 @@ export default function SidebarFoldersSection() {
 
   return (
     <section className="flex flex-col gap-4">
-      <div className="flex items-center  gap-2 px-2">
+      <div className="flex items-center gap-2 px-2">
         <h2 className="text-sm font-medium">Folders</h2>
 
         <AddFolderButton />

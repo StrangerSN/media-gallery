@@ -1,4 +1,5 @@
 import MediaFileCardCheckbox from "@app/components/MediaFileCard/MediaFileCardCheckbox";
+import Svg from "@app/components/Svg";
 import { MediaFile } from "@app/contracts/mediaContract";
 import { useMediaFileStore } from "@app/stores/mediaStore";
 import { useMemo } from "react";
@@ -44,6 +45,10 @@ export default function MediaFileCard(props: Props) {
         width={thumbnail.width}
         height={thumbnail.height}
       />
+
+      <div className="absolute inset-0 flex items-center justify-center">
+        {media.type !== "image" && <Svg type={`${media.type}Icon`} />}
+      </div>
 
       <MediaFileCardCheckbox
         isSelected={isSelected}
