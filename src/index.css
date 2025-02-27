@@ -6,6 +6,10 @@
   --color-secondary-80: #5E6166
 }
 
+* {
+  transition: all 0.2s;
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

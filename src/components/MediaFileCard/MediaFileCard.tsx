@@ -42,10 +42,10 @@ export default function MediaFileCard(props: Props) {
     <div>
       <div
         className={classNames(
-          "group w-50 h-50 relative flex items-center rounded-lg p-1 border-1 hover:shadow-lg select-none",
+          "group w-50 h-50 relative flex items-center rounded-lg p-1 border-1 hover:shadow-lg select-none overflow-hidden cursor-pointer",
           {
-            "border-primary bg-primary/10": isSelected,
-            "border-transparent hover:bg-black/20": !isSelected,
+            "border-primary": isSelected,
+            "border-transparent hover:border-black/20": !isSelected,
           }
         )}
         onClick={() => setIsSelected(media)}
@@ -58,7 +58,15 @@ export default function MediaFileCard(props: Props) {
           height={thumbnail.height}
         />
 
-        <div className="absolute inset-0 flex items-center justify-center">
+        <div
+          className={classNames(
+            "absolute inset-0 flex items-center justify-center",
+            {
+              "bg-primary/10": isSelected,
+              "group-hover:bg-black/20": !isSelected,
+            }
+          )}
+        >
           {media.type !== "image" && <Svg type={`${media.type}Icon`} />}
         </div>
 
