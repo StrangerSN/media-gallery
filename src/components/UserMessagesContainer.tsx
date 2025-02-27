@@ -1,7 +1,7 @@
 import { JSX } from "react";
 
 interface Props {
-  Icon: JSX.Element;
+  Icon?: JSX.Element;
   title: string;
   subtitle: string;
 }
