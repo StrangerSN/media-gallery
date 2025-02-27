@@ -24,26 +24,29 @@ export default function MediaFileCard(props: Props) {
 
   const thumbnail = useMemo(() => {
     const aspectRatio = media.width / media.height;
-    let width = 200;
-    let height = Math.ceil((200 * media.height) / media.width);
+    const isPortrait = media.width < media.height;
 
-    if (aspectRatio < 1) {
-      height = 200;
-      width = Math.ceil((200 * media.width) / media.height);
+    let width = 300;
+    let height = Math.floor(width / aspectRatio);
+
+    if (isPortrait) {
+      width = Math.floor(height / aspectRatio);
+      height = 300;
     }
 
     return {
-      url: `http://picsum.photos/id/${media.id}/${width}/${height}`,
+      url: `http://picsum.photos/id/${media.id}/${width}/${height}.webp`,
+      isPortrait,
       width,
       height,
     };
   }, [media.height, media.id, media.width]);
 
   return (
-    <div>
+    <div className="flex flex-col w-fit">
       <div
         className={classNames(
-          "group w-50 h-50 relative flex items-center rounded-lg p-1 border-1 hover:shadow-lg select-none overflow-hidden cursor-pointer",
+          "group relative flex items-center justify-center flex-1 rounded-lg p-1 border-1 hover:shadow-lg select-none overflow-hidden cursor-pointer",
           {
             "border-primary": isSelected,
             "border-transparent hover:border-black/20": !isSelected,
@@ -52,9 +55,9 @@ export default function MediaFileCard(props: Props) {
         onClick={() => setIsSelected(media)}
       >
         <img
-          className="object-contain border-2 border-neutral-60 rounded"
+          className="object-contain border-2 border-neutral-60 rounded aspect-auto"
           src={thumbnail.url}
-          alt={media.author}
+          alt={media.name}
           width={thumbnail.width}
           height={thumbnail.height}
         />

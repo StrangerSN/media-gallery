@@ -33,9 +33,10 @@ export default function GalleryPage() {
   }
   return (
     <div
-      className="grid gap-4 justify-between"
+      className="grid gap-4"
       style={{
-        gridTemplateColumns: "repeat(auto-fit, 200px)",
+        gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+        gridAutoRows: "minmax(180px, 1fr)",
       }}
     >
       {folderMediaFiles.map((media) => (
