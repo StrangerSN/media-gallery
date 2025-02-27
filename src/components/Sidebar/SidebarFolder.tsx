@@ -1,6 +1,8 @@
 import AddFolderButton from "@app/components/Sidebar/AddFolderButton";
 import { Folder } from "@app/contracts/folderContract";
+import { useFolderStore } from "@app/stores/folderStore";
 import { NavLink } from "react-router";
+import classNames from "classnames";
 
 interface Props {
   folder: Folder;
@@ -10,10 +12,21 @@ interface Props {
 export default function SidebarFolder(props: Props) {
   const { folder, depth = 0 } = props;
 
+  const { selectedFolderId } = useFolderStore();
+
+  const isSelected = selectedFolderId === folder.id;
+
   return (
     <>
       <NavLink
-        className="text-sm flex items-center gap-2 justify-between bg-white rounded-md px-2 py-1 hover:bg-gray-100"
+        className={classNames(
+          "text-sm flex items-center gap-2 justify-between rounded-md px-2 py-1",
+          {
+            "bg-gray-100": isSelected,
+            "hover:bg-gray-200": isSelected,
+            "hover:bg-gray-100": !isSelected,
+          }
+        )}
         to={`/folder/${folder.id}`}
         style={{ marginLeft: `${depth * 0.5}rem` }}
       >
