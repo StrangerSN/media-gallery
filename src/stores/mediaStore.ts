@@ -24,6 +24,7 @@ export const useMediaFileStore = create<MediaState>((set, get) => ({
   allMediaFiles: [
     {
       id: "125",
+      name: "File 125",
       author: "Rick Waalders",
       width: 1500,
       height: 1000,
@@ -34,6 +35,7 @@ export const useMediaFileStore = create<MediaState>((set, get) => ({
     },
     {
       id: "126",
+      name: "File 126",
       author: "Zugr",
       width: 4272,
       height: 2511,
@@ -44,6 +46,7 @@ export const useMediaFileStore = create<MediaState>((set, get) => ({
     },
     {
       id: "127",
+      name: "File 127",
       author: "Marcin Czerwinski",
       width: 4032,
       height: 2272,
@@ -54,6 +57,7 @@ export const useMediaFileStore = create<MediaState>((set, get) => ({
     },
     {
       id: "128",
+      name: "File 128",
       author: "Matteo Minelli",
       width: 3823,
       height: 2549,
@@ -64,6 +68,7 @@ export const useMediaFileStore = create<MediaState>((set, get) => ({
     },
     {
       id: "129",
+      name: "File 129",
       author: "Charlie Foster",
       width: 4910,
       height: 3252,
@@ -74,6 +79,7 @@ export const useMediaFileStore = create<MediaState>((set, get) => ({
     },
     {
       id: "130",
+      name: "File 130",
       author: "Ryan Jacques",
       width: 3807,
       height: 2538,
@@ -84,6 +90,7 @@ export const useMediaFileStore = create<MediaState>((set, get) => ({
     },
     {
       id: "102",
+      name: "File 102",
       author: "Ben Moore",
       width: 4320,
       height: 3240,
@@ -94,6 +101,7 @@ export const useMediaFileStore = create<MediaState>((set, get) => ({
     },
     {
       id: "103",
+      name: "File 103",
       author: "Ilham Rahmansyah",
       width: 2592,
       height: 1936,
@@ -104,6 +112,7 @@ export const useMediaFileStore = create<MediaState>((set, get) => ({
     },
     {
       id: "104",
+      name: "File 104",
       author: "Dyaa Eldin",
       width: 3840,
       height: 2160,
@@ -114,6 +123,7 @@ export const useMediaFileStore = create<MediaState>((set, get) => ({
     },
     {
       id: "106",
+      name: "File 106",
       author: "Arvee Marie",
       width: 2592,
       height: 1728,
@@ -124,6 +134,7 @@ export const useMediaFileStore = create<MediaState>((set, get) => ({
     },
     {
       id: "107",
+      name: "File 107",
       author: "Lukas Schweizer",
       width: 5000,
       height: 3333,
@@ -134,6 +145,7 @@ export const useMediaFileStore = create<MediaState>((set, get) => ({
     },
     {
       id: "108",
+      name: "File 108",
       author: "Florian Klauer",
       width: 2000,
       height: 1333,
@@ -144,6 +156,7 @@ export const useMediaFileStore = create<MediaState>((set, get) => ({
     },
     {
       id: "109",
+      name: "File 109",
       author: "Zwaddi",
       width: 4287,
       height: 2392,
@@ -154,6 +167,7 @@ export const useMediaFileStore = create<MediaState>((set, get) => ({
     },
     {
       id: "110",
+      name: "File 110",
       author: "Kenneth Thewissen",
       width: 5000,
       height: 3333,
@@ -164,6 +178,7 @@ export const useMediaFileStore = create<MediaState>((set, get) => ({
     },
     {
       id: "111",
+      name: "File 111",
       author: "Gabe Rodriguez",
       width: 4400,
       height: 2656,
@@ -174,6 +189,7 @@ export const useMediaFileStore = create<MediaState>((set, get) => ({
     },
     {
       id: "112",
+      name: "File 112",
       author: "Zugr",
       width: 4200,
       height: 2800,
@@ -184,6 +200,7 @@ export const useMediaFileStore = create<MediaState>((set, get) => ({
     },
     {
       id: "113",
+      name: "File 113",
       author: "Zugr",
       width: 4168,
       height: 2464,
@@ -194,6 +211,7 @@ export const useMediaFileStore = create<MediaState>((set, get) => ({
     },
     {
       id: "114",
+      name: "File 114",
       author: "Brian Gonzalez",
       width: 3264,
       height: 2448,
@@ -204,6 +222,7 @@ export const useMediaFileStore = create<MediaState>((set, get) => ({
     },
     {
       id: "115",
+      name: "File 115",
       author: "Christian Hebell",
       width: 1500,
       height: 1000,
@@ -214,6 +233,7 @@ export const useMediaFileStore = create<MediaState>((set, get) => ({
     },
     {
       id: "116",
+      name: "File 116",
       author: "Anton Sulsky",
       width: 3504,
       height: 2336,
@@ -224,6 +244,7 @@ export const useMediaFileStore = create<MediaState>((set, get) => ({
     },
     {
       id: "117",
+      name: "File 117",
       author: "Daniel Ebersole",
       width: 1544,
       height: 1024,
@@ -234,6 +255,7 @@ export const useMediaFileStore = create<MediaState>((set, get) => ({
     },
     {
       id: "118",
+      name: "File 118",
       author: "Rick Waalders",
       width: 1500,
       height: 1000,
@@ -244,6 +266,7 @@ export const useMediaFileStore = create<MediaState>((set, get) => ({
     },
     {
       id: "119",
+      name: "File 119",
       author: "Nadir Balcikli",
       width: 3264,
       height: 2176,
@@ -254,6 +277,7 @@ export const useMediaFileStore = create<MediaState>((set, get) => ({
     },
     {
       id: "120",
+      name: "File 120",
       author: "Guillaume",
       width: 4928,
       height: 3264,
@@ -264,6 +288,7 @@ export const useMediaFileStore = create<MediaState>((set, get) => ({
     },
     {
       id: "121",
+      name: "File 121",
       author: "Radio Pink",
       width: 1600,
       height: 1067,
@@ -274,6 +299,7 @@ export const useMediaFileStore = create<MediaState>((set, get) => ({
     },
     {
       id: "122",
+      name: "File 122",
       author: "Vadim Sherbakov",
       width: 4147,
       height: 2756,
@@ -284,6 +310,7 @@ export const useMediaFileStore = create<MediaState>((set, get) => ({
     },
     {
       id: "123",
+      name: "File 123",
       author: "Mark Doda",
       width: 4928,
       height: 3264,
@@ -294,6 +321,7 @@ export const useMediaFileStore = create<MediaState>((set, get) => ({
     },
     {
       id: "124",
+      name: "File 124",
       author: "Anton Sulsky",
       width: 3504,
       height: 2336,

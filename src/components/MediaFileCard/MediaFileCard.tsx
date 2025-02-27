@@ -2,6 +2,7 @@ import MediaFileCardCheckbox from "@app/components/MediaFileCard/MediaFileCardCh
 import Svg from "@app/components/Svg";
 import { MediaFile } from "@app/contracts/mediaContract";
 import { useMediaFileStore } from "@app/stores/mediaStore";
+import classNames from "classnames";
 import { useMemo } from "react";
 
 interface Props {
@@ -34,26 +35,48 @@ export default function MediaFileCard(props: Props) {
   }, [media.height, media.id, media.width]);
 
   return (
-    <div
-      className="group relative flex items-center bg-white rounded-lg p-1 hover:bg-primary/10 border-1 border-white hover:border-primary hover:shadow-lg"
-      onClick={() => setIsSelected(media)}
-    >
-      <img
-        className="object-contain border-2 border-neutral-60 rounded"
-        src={thumbnail.url}
-        alt={media.author}
-        width={thumbnail.width}
-        height={thumbnail.height}
-      />
+    <div>
+      <div
+        className={classNames(
+          "group w-50 h-50 relative flex items-center rounded-lg p-1 border-1 hover:shadow-lg select-none",
+          {
+            "border-primary bg-primary/10": isSelected,
+            "border-transparent hover:bg-black/20": !isSelected,
+          }
+        )}
+        onClick={() => setIsSelected(media)}
+      >
+        <img
+          className="object-contain border-2 border-neutral-60 rounded"
+          src={thumbnail.url}
+          alt={media.author}
+          width={thumbnail.width}
+          height={thumbnail.height}
+        />
 
-      <div className="absolute inset-0 flex items-center justify-center">
-        {media.type !== "image" && <Svg type={`${media.type}Icon`} />}
+        <div className="absolute inset-0 flex items-center justify-center">
+          {media.type !== "image" && <Svg type={`${media.type}Icon`} />}
+        </div>
+
+        <MediaFileCardCheckbox
+          isSelected={isSelected}
+          orderNumber={orderNumber}
+        />
       </div>
 
-      <MediaFileCardCheckbox
-        isSelected={isSelected}
-        orderNumber={orderNumber}
-      />
+      <div className="p-1">
+        <div
+          className={classNames(
+            "flex justify-center text-xs/5 rounded-xs hover:bg-black/5",
+            {
+              "text-primary": isSelected,
+              "text-secondary-80": !isSelected,
+            }
+          )}
+        >
+          {media.name}
+        </div>
+      </div>
     </div>
   );
 }
