@@ -1,21 +1,8 @@
 import SidebarFolder from "@app/components/Sidebar/SidebarFolder";
-import { Folder } from "@app/contracts/folderContract";
+import { useFolderStore } from "@app/stores/folderStore";
 
 export default function SidebarFoldersSection() {
-  const folders: Folder[] = [
-    {
-      id: 1,
-      name: "Folder 1",
-    },
-    {
-      id: 2,
-      name: "Folder 2",
-    },
-    {
-      id: 3,
-      name: "Folder 3",
-    },
-  ];
+  const { folders } = useFolderStore();
 
   return (
     <section className="flex flex-col gap-4">

@@ -1,8 +1,14 @@
-import MediaCard from "@app/components/MediaCard/MediaCard";
-import { Media } from "@app/contracts/mediaContract";
+import { MediaFile } from "@app/contracts/mediaContract";
+import { create } from "zustand";
 
-export default function MediaGridPage() {
-  const mediaItems: Media[] = [
+interface MediaState {
+  allMediaFiles: MediaFile[];
+  getFolderMediaFiles: (folderId: number) => MediaFile[];
+}
+
+export const useMediaFileStore = create<MediaState>((set, get) => ({
+  // TODO: Load from API
+  allMediaFiles: [
     {
       id: "102",
       author: "Ben Moore",
@@ -10,6 +16,7 @@ export default function MediaGridPage() {
       height: 3240,
       url: "https://unsplash.com/photos/pJILiyPdrXI",
       download_url: "https://picsum.photos/id/102/4320/3240",
+      folderId: 1,
     },
     {
       id: "103",
@@ -18,6 +25,7 @@ export default function MediaGridPage() {
       height: 1936,
       url: "https://unsplash.com/photos/DwTZwZYi9Ww",
       download_url: "https://picsum.photos/id/103/2592/1936",
+      folderId: 1,
     },
     {
       id: "104",
@@ -26,6 +34,7 @@ export default function MediaGridPage() {
       height: 2160,
       url: "https://unsplash.com/photos/2fl-ocJ5MOA",
       download_url: "https://picsum.photos/id/104/3840/2160",
+      folderId: 1,
     },
     {
       id: "106",
@@ -34,6 +43,7 @@ export default function MediaGridPage() {
       height: 1728,
       url: "https://unsplash.com/photos/YnfGtpt2gf4",
       download_url: "https://picsum.photos/id/106/2592/1728",
+      folderId: 1,
     },
     {
       id: "107",
@@ -42,6 +52,7 @@ export default function MediaGridPage() {
       height: 3333,
       url: "https://unsplash.com/photos/9VWOr22LhVI",
       download_url: "https://picsum.photos/id/107/5000/3333",
+      folderId: 1,
     },
     {
       id: "108",
@@ -50,6 +61,7 @@ export default function MediaGridPage() {
       height: 1333,
       url: "https://unsplash.com/photos/t1mqA3V3-7g",
       download_url: "https://picsum.photos/id/108/2000/1333",
+      folderId: 1,
     },
     {
       id: "109",
@@ -58,6 +70,7 @@ export default function MediaGridPage() {
       height: 2392,
       url: "https://unsplash.com/photos/YvYBOSiBJE8",
       download_url: "https://picsum.photos/id/109/4287/2392",
+      folderId: 1,
     },
     {
       id: "110",
@@ -66,6 +79,7 @@ export default function MediaGridPage() {
       height: 3333,
       url: "https://unsplash.com/photos/D76DklsG-5U",
       download_url: "https://picsum.photos/id/110/5000/3333",
+      folderId: 1,
     },
     {
       id: "111",
@@ -74,6 +88,7 @@ export default function MediaGridPage() {
       height: 2656,
       url: "https://unsplash.com/photos/eLUegVAjN7s",
       download_url: "https://picsum.photos/id/111/4400/2656",
+      folderId: 1,
     },
     {
       id: "112",
@@ -82,6 +97,7 @@ export default function MediaGridPage() {
       height: 2800,
       url: "https://unsplash.com/photos/kmF_Aq8gkp0",
       download_url: "https://picsum.photos/id/112/4200/2800",
+      folderId: 1,
     },
     {
       id: "113",
@@ -90,6 +106,7 @@ export default function MediaGridPage() {
       height: 2464,
       url: "https://unsplash.com/photos/yZf1quatKCA",
       download_url: "https://picsum.photos/id/113/4168/2464",
+      folderId: 1,
     },
     {
       id: "114",
@@ -98,6 +115,7 @@ export default function MediaGridPage() {
       height: 2448,
       url: "https://unsplash.com/photos/llYg8Ni43fc",
       download_url: "https://picsum.photos/id/114/3264/2448",
+      folderId: 1,
     },
     {
       id: "115",
@@ -106,6 +124,7 @@ export default function MediaGridPage() {
       height: 1000,
       url: "https://unsplash.com/photos/A6S-q3D67Ss",
       download_url: "https://picsum.photos/id/115/1500/1000",
+      folderId: 1,
     },
     {
       id: "116",
@@ -114,6 +133,7 @@ export default function MediaGridPage() {
       height: 2336,
       url: "https://unsplash.com/photos/YcfCXxo7rpc",
       download_url: "https://picsum.photos/id/116/3504/2336",
+      folderId: 1,
     },
     {
       id: "117",
@@ -122,6 +142,7 @@ export default function MediaGridPage() {
       height: 1024,
       url: "https://unsplash.com/photos/Q14J2k8VE3U",
       download_url: "https://picsum.photos/id/117/1544/1024",
+      folderId: 1,
     },
     {
       id: "118",
@@ -130,6 +151,7 @@ export default function MediaGridPage() {
       height: 1000,
       url: "https://unsplash.com/photos/d-Cr8MEW5Uc",
       download_url: "https://picsum.photos/id/118/1500/1000",
+      folderId: 1,
     },
     {
       id: "119",
@@ -138,6 +160,7 @@ export default function MediaGridPage() {
       height: 2176,
       url: "https://unsplash.com/photos/wE9nUW7tMmk",
       download_url: "https://picsum.photos/id/119/3264/2176",
+      folderId: 1,
     },
     {
       id: "120",
@@ -146,6 +169,7 @@ export default function MediaGridPage() {
       height: 3264,
       url: "https://unsplash.com/photos/_DA3D5P71qs",
       download_url: "https://picsum.photos/id/120/4928/3264",
+      folderId: 1,
     },
     {
       id: "121",
@@ -154,6 +178,7 @@ export default function MediaGridPage() {
       height: 1067,
       url: "https://unsplash.com/photos/p-bkdO43shE",
       download_url: "https://picsum.photos/id/121/1600/1067",
+      folderId: 1,
     },
     {
       id: "122",
@@ -162,6 +187,7 @@ export default function MediaGridPage() {
       height: 2756,
       url: "https://unsplash.com/photos/xS_RzdD5CFE",
       download_url: "https://picsum.photos/id/122/4147/2756",
+      folderId: 1,
     },
     {
       id: "123",
@@ -170,6 +196,7 @@ export default function MediaGridPage() {
       height: 3264,
       url: "https://unsplash.com/photos/tS9hJOnmKK8",
       download_url: "https://picsum.photos/id/123/4928/3264",
+      folderId: 1,
     },
     {
       id: "124",
@@ -178,6 +205,7 @@ export default function MediaGridPage() {
       height: 2336,
       url: "https://unsplash.com/photos/fj0tFloTPGQ",
       download_url: "https://picsum.photos/id/124/3504/2336",
+      folderId: 1,
     },
     {
       id: "125",
@@ -186,6 +214,7 @@ export default function MediaGridPage() {
       height: 1000,
       url: "https://unsplash.com/photos/3HlgJNdnD7I",
       download_url: "https://picsum.photos/id/125/1500/1000",
+      folderId: 1,
     },
     {
       id: "126",
@@ -194,6 +223,7 @@ export default function MediaGridPage() {
       height: 2511,
       url: "https://unsplash.com/photos/asrWX-lU3RE",
       download_url: "https://picsum.photos/id/126/4272/2511",
+      folderId: 1,
     },
     {
       id: "127",
@@ -202,6 +232,7 @@ export default function MediaGridPage() {
       height: 2272,
       url: "https://unsplash.com/photos/rf-0DQu5M6Y",
       download_url: "https://picsum.photos/id/127/4032/2272",
+      folderId: 1,
     },
     {
       id: "128",
@@ -210,6 +241,7 @@ export default function MediaGridPage() {
       height: 2549,
       url: "https://unsplash.com/photos/hlnucYOsL-c",
       download_url: "https://picsum.photos/id/128/3823/2549",
+      folderId: 1,
     },
     {
       id: "129",
@@ -218,6 +250,7 @@ export default function MediaGridPage() {
       height: 3252,
       url: "https://unsplash.com/photos/A88emaZe7d8",
       download_url: "https://picsum.photos/id/129/4910/3252",
+      folderId: 1,
     },
     {
       id: "130",
@@ -226,19 +259,12 @@ export default function MediaGridPage() {
       height: 2538,
       url: "https://unsplash.com/photos/ywiAen4L4qA",
       download_url: "https://picsum.photos/id/130/3807/2538",
+      folderId: 1,
     },
-  ];
-  return (
-    <div
-      className="grid gap-4"
-      style={{
-        gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
-        gridAutoRows: "minmax(180px, 1fr)",
-      }}
-    >
-      {mediaItems.map((media) => (
-        <MediaCard key={media.id} media={media} />
-      ))}
-    </div>
-  );
-}
+  ],
+  getFolderMediaFiles: (folderId) => {
+    return get().allMediaFiles.filter(
+      (mediaFile) => mediaFile.folderId === folderId
+    );
+  },
+}));

@@ -1,11 +1,11 @@
 import Checkbox from "@app/components/Checkbox";
-import { Media } from "@app/contracts/mediaContract";
+import { MediaFile } from "@app/contracts/mediaContract";
 
 interface Props {
-  media: Media;
+  media: MediaFile;
 }
 
-export default function MediaCard(props: Props) {
+export default function MediaFileCard(props: Props) {
   const { media } = props;
 
   const isSelected = media.id === "4";
