@@ -1,4 +1,6 @@
 import MediaFileCard from "@app/components/MediaFileCard/MediaFileCard";
+import Svg from "@app/components/Svg";
+import UserMessagesContainer from "@app/components/UserMessagesContainer";
 import { useFilterStore } from "@app/stores/filterStore";
 import { useFolderStore } from "@app/stores/folderStore";
 import { useMediaFileStore } from "@app/stores/mediaStore";
@@ -19,6 +21,16 @@ export default function GalleryPage() {
   useEffect(() => {
     setSelectedFolder(Number(folderId));
   }, [folderId, setSelectedFolder]);
+
+  if (!folderMediaFiles.length) {
+    return (
+      <UserMessagesContainer
+        Icon={<Svg type="emptyFolderIcon" />}
+        title="This folder is empty"
+        subtitle="Add images, videos and GIFs."
+      />
+    );
+  }
   return (
     <div
       className="grid gap-4"
