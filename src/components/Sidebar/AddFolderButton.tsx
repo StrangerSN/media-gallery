@@ -13,7 +13,8 @@ export default function AddFolderButton(props: Props) {
     <button
       type="button"
       className="flex justify-center items-center hover:bg-white p-1 rounded cursor-pointer h-4 w-4"
-      onClick={() => {
+      onClick={(e) => {
+        e.preventDefault();
         addFolder({ id: Date.now(), name: "New Folder" }, parentFolder);
       }}
     >
