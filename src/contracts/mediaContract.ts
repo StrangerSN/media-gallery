@@ -1,12 +1,5 @@
-export const MediaFileTypes = ["image", "video", "gif"] as const;
+export type MediaFileType = "image" | "video" | "gif";
 
-export const MediaFileTypesDisplayName: Record<MediaFileType, string> = {
-  image: "Images",
-  video: "Videos",
-  gif: "GIFs",
-};
-
-export type MediaFileType = (typeof MediaFileTypes)[number];
 export type MediaFileId = string;
 
 export interface MediaFile {

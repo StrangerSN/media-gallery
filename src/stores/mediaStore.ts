@@ -1,5 +1,9 @@
 import { FolderId } from "@app/contracts/folderContract";
-import { MediaFile, MediaFileId } from "@app/contracts/mediaContract";
+import {
+  MediaFile,
+  MediaFileId,
+  MediaFileType,
+} from "@app/contracts/mediaContract";
 import { create } from "zustand";
 
 interface MediaState {
@@ -7,8 +11,12 @@ interface MediaState {
   selectedMediaFiles: Record<FolderId, MediaFileId[]>;
   getIsSelected: (mediaFile: MediaFile) => boolean;
   setIsSelected: (mediaFile: MediaFile) => void;
-  getFolderMediaFiles: (folderId: FolderId) => MediaFile[];
+  getFolderMediaFiles: (
+    folderId: FolderId,
+    selectedFilters: MediaFileType[]
+  ) => MediaFile[];
   getOrderNumber: (mediaFile: MediaFile) => number;
+  unselectByMediaFileType: (mediaFileType: MediaFileType) => void;
 }
 
 export const useMediaFileStore = create<MediaState>((set, get) => ({
@@ -316,14 +324,34 @@ export const useMediaFileStore = create<MediaState>((set, get) => ({
       };
     });
   },
-  getFolderMediaFiles: (folderId) => {
+  getFolderMediaFiles: (folderId, selectedFilters) => {
     return get().allMediaFiles.filter(
-      (mediaFile) => mediaFile.folderId === folderId
+      (mediaFile) =>
+        mediaFile.folderId === folderId &&
+        selectedFilters.includes(mediaFile.type)
     );
   },
   getOrderNumber: ({ id, folderId }) => {
     const selectedMediaFiles = get().selectedMediaFiles?.[folderId] ?? [];
 
     return selectedMediaFiles.findIndex((x) => x === id) + 1;
+  },
+  unselectByMediaFileType: (mediaFileType) => {
+    const { selectedMediaFiles } = get();
+
+    const newSelectedMediaFiles = Object.fromEntries(
+      Object.entries(selectedMediaFiles).map(([folderId, mediaFileIds]) => [
+        folderId,
+        mediaFileIds.filter(
+          (mediaFileId) =>
+            !get().allMediaFiles.find(
+              (mediaFile) =>
+                mediaFile.id === mediaFileId && mediaFile.type === mediaFileType
+            )
+        ),
+      ])
+    );
+
+    set({ selectedMediaFiles: newSelectedMediaFiles });
   },
 }));

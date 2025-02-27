@@ -1,4 +1,5 @@
 import MediaFileCard from "@app/components/MediaFileCard/MediaFileCard";
+import { useFilterStore } from "@app/stores/filterStore";
 import { useFolderStore } from "@app/stores/folderStore";
 import { useMediaFileStore } from "@app/stores/mediaStore";
 import { useEffect, useMemo } from "react";
@@ -8,10 +9,11 @@ export default function GalleryPage() {
   const { folderId } = useParams();
   const { setSelectedFolder } = useFolderStore();
   const { getFolderMediaFiles } = useMediaFileStore();
+  const { selectedFilters } = useFilterStore();
 
   const folderMediaFiles = useMemo(
-    () => getFolderMediaFiles(Number(folderId)),
-    [folderId, getFolderMediaFiles]
+    () => getFolderMediaFiles(Number(folderId), selectedFilters),
+    [folderId, getFolderMediaFiles, selectedFilters]
   );
 
   useEffect(() => {
