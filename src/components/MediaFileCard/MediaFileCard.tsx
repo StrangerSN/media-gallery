@@ -1,5 +1,6 @@
-import Checkbox from "@app/components/Checkbox";
+import MediaFileCardCheckbox from "@app/components/MediaFileCard/MediaFileCardCheckbox";
 import { MediaFile } from "@app/contracts/mediaContract";
+import { useMediaFileStore } from "@app/stores/mediaStore";
 import { useMemo } from "react";
 
 interface Props {
@@ -9,7 +10,10 @@ interface Props {
 export default function MediaFileCard(props: Props) {
   const { media } = props;
 
-  const isSelected = media.id === "4";
+  const { getIsSelected, setIsSelected, getOrderNumber } = useMediaFileStore();
+
+  const isSelected = getIsSelected(media);
+  const orderNumber = getOrderNumber(media);
 
   const thumbnail = useMemo(() => {
     const aspectRatio = media.width / media.height;
@@ -29,7 +33,10 @@ export default function MediaFileCard(props: Props) {
   }, [media.height, media.id, media.width]);
 
   return (
-    <div className="relative flex items-center bg-white rounded-lg p-1 hover:bg-primary/10 border-1 border-white hover:border-primary hover:shadow-lg">
+    <div
+      className="group relative flex items-center bg-white rounded-lg p-1 hover:bg-primary/10 border-1 border-white hover:border-primary hover:shadow-lg"
+      onClick={() => setIsSelected(media)}
+    >
       <img
         className="object-contain border-2 border-neutral-60 rounded"
         src={thumbnail.url}
@@ -38,11 +45,10 @@ export default function MediaFileCard(props: Props) {
         height={thumbnail.height}
       />
 
-      {isSelected && (
-        <div className="absolute flex bottom-1 left-1">
-          <Checkbox />
-        </div>
-      )}
+      <MediaFileCardCheckbox
+        isSelected={isSelected}
+        orderNumber={orderNumber}
+      />
     </div>
   );
 }

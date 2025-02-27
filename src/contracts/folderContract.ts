@@ -1,5 +1,7 @@
+export type FolderId = number;
+
 export interface Folder {
-  id: number;
+  id: FolderId;
   name: string;
   children?: Folder[];
 }

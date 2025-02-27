@@ -1,9 +1,14 @@
-import { MediaFile } from "@app/contracts/mediaContract";
+import { FolderId } from "@app/contracts/folderContract";
+import { MediaFile, MediaFileId } from "@app/contracts/mediaContract";
 import { create } from "zustand";
 
 interface MediaState {
   allMediaFiles: MediaFile[];
-  getFolderMediaFiles: (folderId: number) => MediaFile[];
+  selectedMediaFiles: Record<FolderId, MediaFileId[]>;
+  getIsSelected: (mediaFile: MediaFile) => boolean;
+  setIsSelected: (mediaFile: MediaFile) => void;
+  getFolderMediaFiles: (folderId: FolderId) => MediaFile[];
+  getOrderNumber: (mediaFile: MediaFile) => number;
 }
 
 export const useMediaFileStore = create<MediaState>((set, get) => ({
@@ -262,9 +267,35 @@ export const useMediaFileStore = create<MediaState>((set, get) => ({
       folderId: 1,
     },
   ],
+  selectedMediaFiles: [],
+  getIsSelected: ({ id, folderId }) => {
+    return get().selectedMediaFiles[folderId]?.includes(id) ?? false;
+  },
+  setIsSelected: ({ id, folderId }) => {
+    set((state) => {
+      const selectedMediaFiles = state.selectedMediaFiles[folderId] ?? [];
+      const isSelected = selectedMediaFiles.includes(id);
+
+      const newSelectedMediaFiles = isSelected
+        ? selectedMediaFiles.filter((mediaFileId) => mediaFileId !== id)
+        : [...selectedMediaFiles, id];
+
+      return {
+        selectedMediaFiles: {
+          ...state.selectedMediaFiles,
+          [folderId]: newSelectedMediaFiles,
+        },
+      };
+    });
+  },
   getFolderMediaFiles: (folderId) => {
     return get().allMediaFiles.filter(
       (mediaFile) => mediaFile.folderId === folderId
     );
+  },
+  getOrderNumber: ({ id, folderId }) => {
+    const selectedMediaFiles = get().selectedMediaFiles?.[folderId] ?? [];
+
+    return selectedMediaFiles.findIndex((x) => x === id) + 1;
   },
 }));

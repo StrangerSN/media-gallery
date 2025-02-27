@@ -1,5 +1,7 @@
+export type MediaFileId = string;
+
 export interface MediaFile {
-  id: string;
+  id: MediaFileId;
   author: string;
   width: number;
   height: number;
