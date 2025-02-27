@@ -15,11 +15,12 @@ export default function MediaFileCard(props: Props) {
   const {
     getIsSelected,
     setIsSelected,
-    getSelectedMediaFilesOrderNumber: getOrderNumber,
+    getSelectedMediaFilesOrderNumber,
+    updateMediaFileName,
   } = useMediaFileStore();
 
   const isSelected = getIsSelected(media);
-  const orderNumber = getOrderNumber(media);
+  const orderNumber = getSelectedMediaFilesOrderNumber(media);
 
   const thumbnail = useMemo(() => {
     const aspectRatio = media.width / media.height;
@@ -77,17 +78,18 @@ export default function MediaFileCard(props: Props) {
       </div>
 
       <div className="p-1">
-        <div
+        <input
+          type="text"
           className={classNames(
-            "flex justify-center text-xs/5 rounded-xs hover:bg-black/5",
+            "outline-0 w-full text-center text-xs/5 rounded-xs hover:bg-black/5 caret-primary",
             {
               "text-primary": isSelected,
               "text-secondary-80": !isSelected,
             }
           )}
-        >
-          {media.name}
-        </div>
+          defaultValue={media.name}
+          onInput={(e) => updateMediaFileName(media, e.currentTarget.value)}
+        />
       </div>
     </div>
   );

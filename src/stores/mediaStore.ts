@@ -22,6 +22,7 @@ interface MediaState {
     fromFolderId: FolderId,
     toFolderId: FolderId
   ) => void;
+  updateMediaFileName: (mediaFile: MediaFile, newName: string) => void;
 }
 
 export const useMediaFileStore = create<MediaState>((set, get) => ({
@@ -409,6 +410,19 @@ export const useMediaFileStore = create<MediaState>((set, get) => ({
     set({
       allMediaFiles: newMediaFiles,
       selectedMediaFiles: { ...selectedMediaFiles, [fromFolderId]: [] },
+    });
+  },
+  updateMediaFileName: ({ id }, newName) => {
+    set((state) => {
+      const allMediaFiles = [...state.allMediaFiles];
+
+      const index = allMediaFiles.findIndex((x) => x.id === id);
+
+      allMediaFiles[index] = { ...allMediaFiles[index], name: newName };
+
+      return {
+        allMediaFiles,
+      };
     });
   },
 }));
