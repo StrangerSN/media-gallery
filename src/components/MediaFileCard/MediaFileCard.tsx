@@ -12,7 +12,11 @@ interface Props {
 export default function MediaFileCard(props: Props) {
   const { media } = props;
 
-  const { getIsSelected, setIsSelected, getOrderNumber } = useMediaFileStore();
+  const {
+    getIsSelected,
+    setIsSelected,
+    getSelectedMediaFilesOrderNumber: getOrderNumber,
+  } = useMediaFileStore();
 
   const isSelected = getIsSelected(media);
   const orderNumber = getOrderNumber(media);

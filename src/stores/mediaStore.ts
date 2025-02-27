@@ -15,8 +15,13 @@ interface MediaState {
     folderId: FolderId,
     selectedFilters: MediaFileType[]
   ) => MediaFile[];
-  getOrderNumber: (mediaFile: MediaFile) => number;
+  getSelectedMediaFilesOrderNumber: (mediaFile: MediaFile) => number;
+  getSelectedMediaFilesCount: (folderId: FolderId | undefined) => number;
   unselectByMediaFileType: (mediaFileType: MediaFileType) => void;
+  moveMediaFilesToFolder: (
+    fromFolderId: FolderId,
+    toFolderId: FolderId
+  ) => void;
 }
 
 export const useMediaFileStore = create<MediaState>((set, get) => ({
@@ -359,10 +364,17 @@ export const useMediaFileStore = create<MediaState>((set, get) => ({
         selectedFilters.includes(mediaFile.type)
     );
   },
-  getOrderNumber: ({ id, folderId }) => {
+  getSelectedMediaFilesOrderNumber: ({ id, folderId }) => {
     const selectedMediaFiles = get().selectedMediaFiles?.[folderId] ?? [];
 
     return selectedMediaFiles.findIndex((x) => x === id) + 1;
+  },
+  getSelectedMediaFilesCount: (folderId) => {
+    if (!folderId) return 0;
+
+    const selectedMediaFiles = get().selectedMediaFiles?.[folderId] ?? [];
+
+    return selectedMediaFiles.length;
   },
   unselectByMediaFileType: (mediaFileType) => {
     const { selectedMediaFiles } = get();
@@ -381,5 +393,22 @@ export const useMediaFileStore = create<MediaState>((set, get) => ({
     );
 
     set({ selectedMediaFiles: newSelectedMediaFiles });
+  },
+  moveMediaFilesToFolder: (fromFolderId, toFolderId) => {
+    const { allMediaFiles, selectedMediaFiles } = get();
+
+    const selectedFilesFromFolder = selectedMediaFiles[fromFolderId];
+
+    const newMediaFiles = allMediaFiles.map((x) => ({
+      ...x,
+      folderId: selectedFilesFromFolder.includes(x.id)
+        ? toFolderId
+        : x.folderId,
+    }));
+
+    set({
+      allMediaFiles: newMediaFiles,
+      selectedMediaFiles: { ...selectedMediaFiles, [fromFolderId]: [] },
+    });
   },
 }));
