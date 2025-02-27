@@ -36,6 +36,7 @@ export default function GalleryPage() {
       className="grid gap-4"
       style={{
         gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))",
+        gridAutoRows: "minmax(200px, 1fr)",
       }}
     >
       {folderMediaFiles.map((media) => (
