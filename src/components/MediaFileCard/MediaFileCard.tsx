@@ -1,7 +1,7 @@
 import MediaFileCardCheckbox from "@app/components/MediaFileCard/MediaFileCardCheckbox";
 import Svg from "@app/components/Svg";
 import { MediaFile } from "@app/contracts/mediaContract";
-import { useMediaFileStore } from "@app/stores/mediaStore";
+import { SelectionType, useMediaFileStore } from "@app/stores/mediaStore";
 import classNames from "classnames";
 import { useMemo } from "react";
 
@@ -21,6 +21,18 @@ export default function MediaFileCard(props: Props) {
 
   const isSelected = getIsSelected(media);
   const orderNumber = getSelectedMediaFilesOrderNumber(media);
+
+  const clickHandler = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    let type: SelectionType = "single";
+
+    if (e.shiftKey) {
+      type = "range";
+    } else if (e.metaKey) {
+      type = "multi";
+    }
+
+    setIsSelected(media, type);
+  };
 
   const thumbnail = useMemo(() => {
     const aspectRatio = media.width / media.height;
@@ -52,7 +64,7 @@ export default function MediaFileCard(props: Props) {
             "border-transparent hover:border-black/20": !isSelected,
           }
         )}
-        onClick={() => setIsSelected(media)}
+        onClick={(e) => clickHandler(e)}
       >
         <img
           className="object-contain border-2 border-neutral-60 rounded aspect-auto"

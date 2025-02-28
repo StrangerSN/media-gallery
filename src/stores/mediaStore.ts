@@ -6,11 +6,13 @@ import {
 } from "@app/contracts/mediaContract";
 import { create } from "zustand";
 
+export type SelectionType = "single" | "multi" | "range";
+
 interface MediaState {
   allMediaFiles: MediaFile[];
   selectedMediaFiles: Record<FolderId, MediaFileId[]>;
   getIsSelected: (mediaFile: MediaFile) => boolean;
-  setIsSelected: (mediaFile: MediaFile) => void;
+  setIsSelected: (mediaFile: MediaFile, type: SelectionType) => void;
   getFolderMediaFiles: (
     folderId: FolderId,
     selectedFilters: MediaFileType[]
@@ -341,21 +343,53 @@ export const useMediaFileStore = create<MediaState>((set, get) => ({
   getIsSelected: ({ id, folderId }) => {
     return get().selectedMediaFiles[folderId]?.includes(id) ?? false;
   },
-  setIsSelected: ({ id, folderId }) => {
+  setIsSelected: ({ id, folderId }, type) => {
     set((state) => {
       const selectedMediaFiles = state.selectedMediaFiles[folderId] ?? [];
       const isSelected = selectedMediaFiles.includes(id);
 
-      const newSelectedMediaFiles = isSelected
-        ? selectedMediaFiles.filter((mediaFileId) => mediaFileId !== id)
-        : [...selectedMediaFiles, id];
+      let newSelectedMediaFiles = [];
 
-      return {
-        selectedMediaFiles: {
-          ...state.selectedMediaFiles,
-          [folderId]: newSelectedMediaFiles,
-        },
-      };
+      switch (type) {
+        case "single": {
+          newSelectedMediaFiles = [id];
+          break;
+        }
+        case "multi": {
+          newSelectedMediaFiles = isSelected
+            ? selectedMediaFiles.filter((mediaFileId) => mediaFileId !== id)
+            : [...selectedMediaFiles, id];
+          break;
+        }
+        case "range": {
+          const folderMediaFiles = get().allMediaFiles.filter(
+            (mediaFile) => mediaFile.folderId === folderId
+          );
+
+          const folderSelectedMediaFiles = get().selectedMediaFiles[folderId];
+
+          const lastSelectedMediaFile =
+            folderSelectedMediaFiles[folderSelectedMediaFiles.length - 1];
+
+          const startIdx = folderMediaFiles.findIndex(
+            (x) => x.id === lastSelectedMediaFile
+          );
+
+          const endIdx = folderMediaFiles.findIndex((x) => x.id === id);
+
+          const minIndex = Math.min(startIdx, endIdx);
+          const maxIndex = Math.max(startIdx, endIdx);
+
+          newSelectedMediaFiles = [
+            ...selectedMediaFiles,
+            ...folderMediaFiles.slice(minIndex, maxIndex + 1).map((x) => x.id),
+          ];
+
+          break;
+        }
+      }
+
+      return { selectedMediaFiles: { [folderId]: newSelectedMediaFiles } };
     });
   },
   getFolderMediaFiles: (folderId, selectedFilters) => {
